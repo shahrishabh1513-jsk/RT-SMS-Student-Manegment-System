@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EduTrack Pro</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="dashboard-container admin-dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="logo-text">Hogwarts<span class="logo-highlight">Portal</span></span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="avatar-container">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin001" alt="Admin Avatar" id="admin-avatar">
+                    <span class="status-indicator online"></span>
+                </div>
+                <div class="user-info">
+                    <h4 id="admin-name">System Administrator</h4>
+                    <p class="user-role">Administrator</p>
+                    <p class="user-department" id="admin-department">System Administration</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="student-management.html" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="faculty-management.html" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Faculty Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="course-management.html" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            <span>Course & Subject</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="attendance-reports.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="timeline-management.html" class="nav-link">
+                            <i class="fas fa-timeline"></i>
+                            <span>Timeline</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="grievance-management.html" class="nav-link">
+                            <i class="fas fa-comment-medical"></i>
+                            <span>Grievance</span>
+                            <div class="nav-badge new">8</div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="notices-management.html" class="nav-link">
+                            <i class="fas fa-bullhorn"></i>
+                            <span>Notices</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="exam-management.html" class="nav-link">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Exam Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="repository-management.html" class="nav-link">
+                            <i class="fas fa-database"></i>
+                            <span>Repository</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="leave-management.html" class="nav-link">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <span>Leave Management</span>
+                            <div class="nav-badge">12</div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="feedback-analytics.html" class="nav-link">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Feedback</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports-analytics.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports & Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="user-roles.html" class="nav-link">
+                            <i class="fas fa-user-shield"></i>
+                            <span>User Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="system-settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>System Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="btn btn-primary btn-sm btn-full" id="quick-add-user">
+                    <i class="fas fa-user-plus"></i> Add New User
+                </button>
+                <button class="btn btn-secondary btn-sm btn-full" id="quick-generate-report">
+                    <i class="fas fa-file-export"></i> Generate Report
+                </button>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <i class="fas fa-circle status-active"></i>
+                    <span>System Active</span>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title">Admin Dashboard</h1>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Home</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="breadcrumb-item active">Dashboard</span>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <!-- Search -->
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search users, courses, etc..." id="global-search">
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="notifications">
+                        <button class="icon-btn" id="notification-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">15</span>
+                        </button>
+                        <div class="notification-dropdown" id="notification-dropdown">
+                            <div class="notification-header">
+                                <h4>System Notifications</h4>
+                                <button class="mark-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <!-- Notifications will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="icon-btn" id="theme-toggle">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    
+                    <!-- User Menu -->
+                    <div class="user-menu">
+                        <button class="user-menu-btn" id="user-menu-btn">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin001" alt="User">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown" id="user-dropdown">
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card total-users">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Users</h3>
+                        <div class="stat-value" id="total-users">2,850</div>
+                        <div class="stat-detail">
+                            <span class="detail-item">2,500 Students</span>
+                            <span class="detail-item">150 Faculty</span>
+                            <span class="detail-item">5 Admin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card attendance-rate">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Avg. Attendance</h3>
+                        <div class="stat-value" id="avg-attendance">94.7%</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 94.7%"></div>
+                            </div>
+                            <span class="progress-text">+1.2% from last week</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card active-courses">
+                    <div class="stat-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Active Courses</h3>
+                        <div class="stat-value" id="active-courses">85</div>
+                        <div class="stat-detail">Across 12 departments</div>
+                    </div>
+                </div>
+
+                <div class="stat-card pending-approvals">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Pending Approvals</h3>
+                        <div class="stat-value" id="pending-approvals">47</div>
+                        <div class="stat-detail">Require immediate attention</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Dashboard -->
+            <div class="analytics-dashboard">
+                <!-- Row 1: Charts -->
+                <div class="analytics-row">
+                    <div class="analytics-card wide">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-area"></i> System Usage Overview
+                            </h3>
+                            <select class="card-select" id="usage-period">
+                                <option value="7d">Last 7 Days</option>
+                                <option value="30d" selected>Last 30 Days</option>
+                                <option value="90d">Last 90 Days</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <div id="usage-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-pie-chart"></i> User Distribution
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="user-distribution-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Recent Activities & System Health -->
+                <div class="analytics-row">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-history"></i> Recent Activities
+                            </h3>
+                            <button class="card-action" id="refresh-activities">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="activities-list" id="activities-list">
+                                <!-- Activities will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-heartbeat"></i> System Health
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="system-health">
+                                <div class="health-metric">
+                                    <div class="metric-header">
+                                        <span class="metric-label">Server Uptime</span>
+                                        <span class="metric-value">99.9%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill success" style="width: 99.9%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="metric-header">
+                                        <span class="metric-label">Database Performance</span>
+                                        <span class="metric-value">98.5%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill success" style="width: 98.5%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="metric-header">
+                                        <span class="metric-label">API Response Time</span>
+                                        <span class="metric-value">125ms</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill warning" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="metric-header">
+                                        <span class="metric-label">Storage Usage</span>
+                                        <span class="metric-value">72%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill warning" style="width: 72%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="health-status">
+                                <div class="status-item online">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>All systems operational</span>
+                                </div>
+                                <div class="status-time">
+                                    <i class="fas fa-clock"></i>
+                                    Last checked: Just now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Management -->
+            <div class="management-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Quick Management</h2>
+                </div>
+                
+                <div class="management-grid">
+                    <!-- Students -->
+                    <div class="management-card">
+                        <div class="management-header">
+                            <h3><i class="fas fa-user-graduate"></i> Students</h3>
+                            <span class="management-count">2,500</span>
+                        </div>
+                        <div class="management-body">
+                            <div class="management-stats">
+                                <div class="stat">
+                                    <span class="stat-value">95%</span>
+                                    <span class="stat-label">Active</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">5%</span>
+                                    <span class="stat-label">Inactive</span>
+                                </div>
+                            </div>
+                            <div class="management-actions">
+                                <button class="btn btn-sm btn-outline" data-action="add-student">
+                                    <i class="fas fa-plus"></i> Add New
+                                </button>
+                                <button class="btn btn-sm btn-primary" data-action="view-students">
+                                    <i class="fas fa-list"></i> View All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty -->
+                    <div class="management-card">
+                        <div class="management-header">
+                            <h3><i class="fas fa-chalkboard-teacher"></i> Faculty</h3>
+                            <span class="management-count">150</span>
+                        </div>
+                        <div class="management-body">
+                            <div class="management-stats">
+                                <div class="stat">
+                                    <span class="stat-value">85%</span>
+                                    <span class="stat-label">Active</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">15%</span>
+                                    <span class="stat-label">On Leave</span>
+                                </div>
+                            </div>
+                            <div class="management-actions">
+                                <button class="btn btn-sm btn-outline" data-action="add-faculty">
+                                    <i class="fas fa-plus"></i> Add New
+                                </button>
+                                <button class="btn btn-sm btn-primary" data-action="view-faculty">
+                                    <i class="fas fa-list"></i> View All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Courses -->
+                    <div class="management-card">
+                        <div class="management-header">
+                            <h3><i class="fas fa-book"></i> Courses</h3>
+                            <span class="management-count">85</span>
+                        </div>
+                        <div class="management-body">
+                            <div class="management-stats">
+                                <div class="stat">
+                                    <span class="stat-value">78</span>
+                                    <span class="stat-label">Active</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">7</span>
+                                    <span class="stat-label">Upcoming</span>
+                                </div>
+                            </div>
+                            <div class="management-actions">
+                                <button class="btn btn-sm btn-outline" data-action="add-course">
+                                    <i class="fas fa-plus"></i> Add New
+                                </button>
+                                <button class="btn btn-sm btn-primary" data-action="view-courses">
+                                    <i class="fas fa-list"></i> View All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notices -->
+                    <div class="management-card">
+                        <div class="management-header">
+                            <h3><i class="fas fa-bullhorn"></i> Notices</h3>
+                            <span class="management-count">24</span>
+                        </div>
+                        <div class="management-body">
+                            <div class="management-stats">
+                                <div class="stat">
+                                    <span class="stat-value">18</span>
+                                    <span class="stat-label">Active</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">6</span>
+                                    <span class="stat-label">Archived</span>
+                                </div>
+                            </div>
+                            <div class="management-actions">
+                                <button class="btn btn-sm btn-outline" data-action="create-notice">
+                                    <i class="fas fa-plus"></i> Create New
+                                </button>
+                                <button class="btn btn-sm btn-primary" data-action="view-notices">
+                                    <i class="fas fa-list"></i> View All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Data Tables -->
+            <div class="data-tables-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="recent-students">Recent Students</button>
+                    <button class="tab-btn" data-tab="recent-faculty">Recent Faculty</button>
+                    <button class="tab-btn" data-tab="pending-approvals-tab">Pending Approvals</button>
+                    <button class="tab-btn" data-tab="system-logs">System Logs</button>
+                </div>
+
+                <div class="tab-content active" id="recent-students">
+                    <div class="table-responsive">
+                        <table class="data-table" id="recent-students-table">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Semester</th>
+                                    <th>Status</th>
+                                    <th>Join Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="recent-faculty">
+                    <div class="table-responsive">
+                        <table class="data-table" id="recent-faculty-table">
+                            <thead>
+                                <tr>
+                                    <th>Faculty ID</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Subjects</th>
+                                    <th>Status</th>
+                                    <th>Join Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="pending-approvals-tab">
+                    <div class="table-responsive">
+                        <table class="data-table" id="pending-approvals-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Type</th>
+                                    <th>Submitted By</th>
+                                    <th>Details</th>
+                                    <th>Submitted On</th>
+                                    <th>Priority</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="system-logs">
+                    <div class="table-responsive">
+                        <table class="data-table" id="system-logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Log ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Level</th>
+                                    <th>Module</th>
+                                    <th>Action</th>
+                                    <th>User</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2024 EduTrack Pro. All rights reserved.</p>
+                        <p class="footer-links">
+                            <a href="#">Privacy Policy</a> • 
+                            <a href="#">Terms of Service</a> • 
+                            <a href="#">Help Center</a>
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <p class="system-info">
+                            <i class="fas fa-server"></i>
+                            <span>v2.5.1 • System Uptime: 99.9% • Last updated: Just now</span>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Add User Modal -->
+        <div class="modal" id="add-user-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New User</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user-form">
+                        <div class="form-step active" data-step="1">
+                            <div class="form-group">
+                                <label>User Type</label>
+                                <div class="user-type-selector">
+                                    <div class="type-option" data-type="student">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <span>Student</span>
+                                    </div>
+                                    <div class="type-option" data-type="faculty">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        <span>Faculty</span>
+                                    </div>
+                                    <div class="type-option" data-type="admin">
+                                        <i class="fas fa-user-shield"></i>
+                                        <span>Admin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="2">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="user-fullname">Full Name</label>
+                                    <input type="text" id="user-fullname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user-email">Email</label>
+                                    <input type="email" id="user-email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="user-phone">Phone Number</label>
+                                    <input type="tel" id="user-phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user-dob">Date of Birth</label>
+                                    <input type="date" id="user-dob" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="3">
+                            <div class="form-group">
+                                <label for="user-username">Username</label>
+                                <input type="text" id="user-username" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="user-password">Password</label>
+                                    <input type="password" id="user-password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user-confirm-password">Confirm Password</label>
+                                    <input type="password" id="user-confirm-password" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="4">
+                            <div id="user-specific-fields">
+                                <!-- Dynamic fields based on user type -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-progress">
+                        <div class="progress-steps">
+                            <span class="step active">1</span>
+                            <span class="step">2</span>
+                            <span class="step">3</span>
+                            <span class="step">4</span>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" id="prev-step">Previous</button>
+                        <button class="btn btn-primary" id="next-step">Next</button>
+                        <button class="btn btn-success" id="submit-user" style="display: none;">Create User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.35.0/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

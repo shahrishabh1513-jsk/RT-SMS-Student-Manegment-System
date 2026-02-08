@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance | EduTrack Pro</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/faculty.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="dashboard-container faculty-dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="logo-text">Hogwarts<span class="logo-highlight">Portal</span></span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="avatar-container">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=faculty001" alt="Faculty Avatar" id="faculty-avatar">
+                    <span class="status-indicator online"></span>
+                </div>
+                <div class="user-info">
+                    <h4 id="faculty-name">Dr. Sarah Williams</h4>
+                    <p class="user-role">Faculty</p>
+                    <p class="user-department" id="faculty-department">Computer Science Department</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="attendance.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="mark-attendance.html" class="nav-link">
+                            <i class="fas fa-qrcode"></i>
+                            <span>Mark Attendance</span>
+                        </a>
+                    </li>
+                    <!-- Other navigation items... -->
+                </ul>
+            </nav>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="btn btn-primary btn-sm btn-full" id="quick-scan">
+                    <i class="fas fa-camera"></i> Start Scanning
+                </button>
+                <button class="btn btn-secondary btn-sm btn-full" id="quick-manual">
+                    <i class="fas fa-keyboard"></i> Manual Entry
+                </button>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <i class="fas fa-circle status-active"></i>
+                    <span>System Active</span>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title">Mark Attendance</h1>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Faculty</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="breadcrumb-item active">Mark Attendance</span>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <!-- Live Status -->
+                    <div class="live-status">
+                        <span class="status-indicator active"></span>
+                        <span id="status-text">Ready to mark attendance</span>
+                    </div>
+                    
+                    <!-- Timer -->
+                    <div class="timer" id="session-timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer-display">00:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Attendance Session Setup -->
+            <div class="session-setup">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-cogs"></i> Setup Attendance Session
+                        </h3>
+                        <div class="session-status" id="session-status">
+                            <span class="status-badge inactive">Inactive</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="setup-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="select-subject">
+                                        <i class="fas fa-book"></i> Select Subject
+                                    </label>
+                                    <select id="select-subject" class="form-select">
+                                        <option value="">-- Select Subject --</option>
+                                        <option value="DS">Data Structures (BCS-301)</option>
+                                        <option value="DBMS">Database Systems (BCS-302)</option>
+                                        <option value="OS">Operating Systems (BCS-303)</option>
+                                        <option value="CN">Computer Networks (BCS-304)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="select-section">
+                                        <i class="fas fa-users"></i> Select Section
+                                    </label>
+                                    <select id="select-section" class="form-select">
+                                        <option value="">-- Select Section --</option>
+                                        <option value="A">Section A</option>
+                                        <option value="B">Section B</option>
+                                        <option value="C">Section C</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="lecture-date">
+                                        <i class="fas fa-calendar"></i> Lecture Date
+                                    </label>
+                                    <input type="date" id="lecture-date" class="form-input" value="2024-11-25">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lecture-time">
+                                        <i class="fas fa-clock"></i> Lecture Time
+                                    </label>
+                                    <input type="time" id="lecture-time" class="form-input" value="10:00">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lecture-duration">
+                                        <i class="fas fa-hourglass"></i> Duration (minutes)
+                                    </label>
+                                    <input type="number" id="lecture-duration" class="form-input" value="60" min="30" max="180">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lecture-topic">
+                                    <i class="fas fa-sticky-note"></i> Lecture Topic
+                                </label>
+                                <input type="text" id="lecture-topic" class="form-input" placeholder="Enter today's lecture topic">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button class="btn btn-secondary" id="cancel-session">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button class="btn btn-primary" id="start-session">
+                                    <i class="fas fa-play"></i> Start Attendance Session
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Methods -->
+            <div class="attendance-methods-section">
+                <div class="methods-tabs">
+                    <button class="method-tab active" data-method="qr">
+                        <i class="fas fa-qrcode"></i>
+                        <span>QR Code Scanner</span>
+                    </button>
+                    <button class="method-tab" data-method="manual">
+                        <i class="fas fa-keyboard"></i>
+                        <span>Manual Entry</span>
+                    </button>
+                    <button class="method-tab" data-method="bulk">
+                        <i class="fas fa-users"></i>
+                        <span>Bulk Update</span>
+                    </button>
+                    <button class="method-tab" data-method="import">
+                        <i class="fas fa-file-import"></i>
+                        <span>Import File</span>
+                    </button>
+                </div>
+
+                <!-- QR Scanner Method -->
+                <div class="method-content active" id="qr-method">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-camera"></i> QR Code Scanner
+                            </h3>
+                            <div class="scanner-stats">
+                                <span class="stat">
+                                    <i class="fas fa-user-check"></i>
+                                    <span id="scanned-count">0</span> scanned
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-user-clock"></i>
+                                    <span id="remaining-count">45</span> remaining
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="scanner-container">
+                                <div class="scanner-view" id="scanner-view">
+                                    <div class="scanner-placeholder" id="scanner-placeholder">
+                                        <i class="fas fa-camera"></i>
+                                        <p>Click "Start Scanning" to begin</p>
+                                        <p class="placeholder-sub">Make sure camera permissions are granted</p>
+                                    </div>
+                                    <video id="scanner-video" style="display: none;"></video>
+                                    <canvas id="scanner-canvas" style="display: none;"></canvas>
+                                    <div class="scanner-overlay">
+                                        <div class="scan-frame"></div>
+                                        <div class="scan-line"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scanner-controls">
+                                    <button class="btn btn-primary btn-lg" id="start-scanning-btn">
+                                        <i class="fas fa-play"></i> Start Scanning
+                                    </button>
+                                    <button class="btn btn-secondary btn-lg" id="stop-scanning-btn" style="display: none;">
+                                        <i class="fas fa-stop"></i> Stop Scanning
+                                    </button>
+                                    <button class="btn btn-outline" id="toggle-flash">
+                                        <i class="fas fa-lightbulb"></i> Flash
+                                    </button>
+                                    <button class="btn btn-outline" id="switch-camera">
+                                        <i class="fas fa-sync-alt"></i> Switch Camera
+                                    </button>
+                                </div>
+                                
+                                <div class="scanner-help">
+                                    <h4><i class="fas fa-info-circle"></i> How to Scan</h4>
+                                    <ol>
+                                        <li>Make sure students open their QR codes on their devices</li>
+                                        <li>Position the QR code within the scanning frame</li>
+                                        <li>Hold steady until the scanner detects the code</li>
+                                        <li>Audible beep confirms successful scan</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Entry Method -->
+                <div class="method-content" id="manual-method">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-keyboard"></i> Manual Attendance Entry
+                            </h3>
+                            <div class="manual-stats">
+                                <span class="stat">
+                                    <i class="fas fa-user-check"></i>
+                                    <span id="marked-count">0</span> marked
+                                </span>
+                                <button class="btn btn-sm btn-primary" id="mark-all-present">
+                                    <i class="fas fa-check-circle"></i> Mark All Present
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="manual-attendance">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="search-student" placeholder="Search students by name or roll number...">
+                                </div>
+                                
+                                <div class="attendance-table-container">
+                                    <table class="attendance-table" id="manual-attendance-table">
+                                        <thead>
+                                            <tr>
+                                                <th width="50">S.No</th>
+                                                <th>Roll Number</th>
+                                                <th>Student Name</th>
+                                                <th width="150">Status</th>
+                                                <th width="200">Remarks</th>
+                                                <th width="100">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="students-list">
+                                            <!-- Students will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="bulk-actions">
+                                    <select id="bulk-status" class="form-select-sm">
+                                        <option value="">Bulk Status Update</option>
+                                        <option value="present">Mark Selected as Present</option>
+                                        <option value="absent">Mark Selected as Absent</option>
+                                        <option value="leave">Mark Selected as Leave</option>
+                                    </select>
+                                    <button class="btn btn-sm btn-primary" id="apply-bulk">
+                                        Apply to Selected
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scanned/Marked Students -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list-check"></i> Marked Students
+                    </h3>
+                    <button class="btn btn-sm btn-success" id="save-attendance">
+                        <i class="fas fa-save"></i> Save Attendance
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="marked-students">
+                        <div class="student-categories">
+                            <div class="category present">
+                                <h4><i class="fas fa-check-circle"></i> Present <span class="count" id="present-count">0</span></h4>
+                                <div class="student-list" id="present-list">
+                                    <!-- Present students will be added here -->
+                                </div>
+                            </div>
+                            
+                            <div class="category absent">
+                                <h4><i class="fas fa-times-circle"></i> Absent <span class="count" id="absent-count">0</span></h4>
+                                <div class="student-list" id="absent-list">
+                                    <!-- Absent students will be added here -->
+                                </div>
+                            </div>
+                            
+                            <div class="category leave">
+                                <h4><i class="fas fa-envelope"></i> Leave <span class="count" id="leave-count">0</span></h4>
+                                <div class="student-list" id="leave-list">
+                                    <!-- Leave students will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="attendance-summary">
+                            <h4><i class="fas fa-chart-pie"></i> Summary</h4>
+                            <div class="summary-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Total Students:</span>
+                                    <span class="stat-value" id="total-students-count">45</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Attendance %:</span>
+                                    <span class="stat-value" id="attendance-percentage">0%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Session Duration:</span>
+                                    <span class="stat-value" id="session-duration">00:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-chart">
+                                <canvas id="attendance-summary-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Details -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-info-circle"></i> Session Details
+                    </h3>
+                    <button class="btn btn-sm btn-outline" id="end-session">
+                        <i class="fas fa-stop"></i> End Session
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="session-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Subject:</span>
+                            <span class="detail-value" id="session-subject">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Section:</span>
+                            <span class="detail-value" id="session-section">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Date & Time:</span>
+                            <span class="detail-value" id="session-datetime">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Topic:</span>
+                            <span class="detail-value" id="session-topic">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Started At:</span>
+                            <span class="detail-value" id="session-started">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Session ID:</span>
+                            <span class="detail-value" id="session-id">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="session-notes">
+                        <h5><i class="fas fa-sticky-note"></i> Additional Notes</h5>
+                        <textarea id="session-notes" placeholder="Add any additional notes about this attendance session..."></textarea>
+                    </div>
+                    
+                    <div class="session-actions">
+                        <button class="btn btn-outline" id="print-attendance">
+                            <i class="fas fa-print"></i> Print Report
+                        </button>
+                        <button class="btn btn-outline" id="export-attendance">
+                            <i class="fas fa-file-export"></i> Export as CSV
+                        </button>
+                        <button class="btn btn-outline" id="send-notification">
+                            <i class="fas fa-bell"></i> Notify Absent Students
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2024 EduTrack Pro. All rights reserved.</p>
+                        <p class="footer-links">
+                            <a href="#">Privacy Policy</a> • 
+                            <a href="#">Terms of Service</a> • 
+                            <a href="#">Help Center</a>
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <p class="system-info">
+                            <i class="fas fa-server"></i>
+                            <span>Attendance System • Live Session</span>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Student Detail Modal -->
+        <div class="modal" id="student-detail-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Student Details</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            <img id="modal-avatar" src="" alt="Student Avatar">
+                        </div>
+                        <div class="student-details">
+                            <h4 id="modal-name">--</h4>
+                            <p class="student-id" id="modal-id">--</p>
+                            <p class="student-course" id="modal-course">--</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-status">
+                        <h5>Mark Attendance</h5>
+                        <div class="status-options">
+                            <button class="status-option present" data-status="present">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Present</span>
+                            </button>
+                            <button class="status-option absent" data-status="absent">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Absent</span>
+                            </button>
+                            <button class="status-option leave" data-status="leave">
+                                <i class="fas fa-envelope"></i>
+                                <span>Leave</span>
+                            </button>
+                            <button class="status-option late" data-status="late">
+                                <i class="fas fa-clock"></i>
+                                <span>Late</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="remarks-section">
+                        <label for="student-remarks">Remarks (Optional)</label>
+                        <textarea id="student-remarks" placeholder="Add remarks about this student's attendance..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-mark">Cancel</button>
+                    <button class="btn btn-primary" id="save-mark">Save Attendance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/faculty.js"></script>
+    <script src="../js/qr-scanner.js"></script>
+</body>
+</html>

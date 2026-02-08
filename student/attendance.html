@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance | EduTrack Pro</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="dashboard-container student-dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="logo-text">Hogwarts<span class="logo-highlight">Portal</span></span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="avatar-container">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=student001" alt="Student Avatar" id="student-avatar">
+                    <span class="status-indicator online"></span>
+                </div>
+                <div class="user-info">
+                    <h4 id="student-name">John Smith</h4>
+                    <p class="user-role">Student</p>
+                    <p class="user-course" id="student-course">BSc Computer Science - Sem 5</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="attendance.html" class="nav-link">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Attendance</span>
+                            <span class="nav-badge">95%</span>
+                        </a>
+                    </li>
+                    <!-- Other navigation items... -->
+                </ul>
+            </nav>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="btn btn-primary btn-sm btn-full" id="quick-attendance">
+                    <i class="fas fa-qrcode"></i> Mark Attendance
+                </button>
+                <button class="btn btn-secondary btn-sm btn-full" id="download-report">
+                    <i class="fas fa-download"></i> Download Report
+                </button>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <i class="fas fa-circle status-active"></i>
+                    <span>System Active</span>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title">Attendance</h1>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Home</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="breadcrumb-item active">Attendance</span>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <!-- Search -->
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search subjects..." id="attendance-search">
+                    </div>
+                    
+                    <!-- Date Range -->
+                    <div class="date-range">
+                        <button class="icon-btn" id="prev-period">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="current-period">November 2024</span>
+                        <button class="icon-btn" id="next-period">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Filter -->
+                    <button class="icon-btn" id="filter-btn">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Attendance Overview -->
+            <div class="attendance-overview">
+                <div class="overview-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Overall Attendance</h3>
+                            <div class="stat-value">95.2%</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 95.2%"></div>
+                                </div>
+                                <span class="progress-text">Good</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Present Days</h3>
+                            <div class="stat-value">48</div>
+                            <div class="stat-detail">out of 50 working days</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Current Streak</h3>
+                            <div class="stat-value">12 days</div>
+                            <div class="stat-detail">No absences this month</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Required Minimum</h3>
+                            <div class="stat-value">75%</div>
+                            <div class="stat-detail">+20.2% above requirement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Chart -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-bar"></i> Attendance Trend
+                        </h3>
+                        <select class="card-select" id="trend-period">
+                            <option value="month">This Month</option>
+                            <option value="semester">This Semester</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div class="attendance-trend-chart">
+                            <canvas id="attendanceTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject-wise Attendance -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-book"></i> Subject-wise Attendance
+                    </h3>
+                    <div class="card-actions">
+                        <button class="btn btn-sm btn-outline" id="export-subject-data">
+                            <i class="fas fa-file-export"></i> Export
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="subject-attendance-table">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Total Classes</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Percentage</th>
+                                    <th>Status</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subject-attendance-body">
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Attendance Calendar -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-alt"></i> Daily Attendance Calendar
+                    </h3>
+                    <div class="month-navigation">
+                        <button class="icon-btn" id="prev-month">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h4 id="current-month">November 2024</h4>
+                        <button class="icon-btn" id="next-month">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="attendance-calendar" id="attendance-calendar">
+                        <!-- Calendar will be generated by JS -->
+                    </div>
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <span class="legend-box present"></span>
+                            <span>Present</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-box absent"></span>
+                            <span>Absent</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-box holiday"></span>
+                            <span>Holiday</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-box leave"></span>
+                            <span>Leave</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-box today"></span>
+                            <span>Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Records -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list"></i> Detailed Attendance Records
+                    </h3>
+                    <div class="record-filters">
+                        <select class="filter-select" id="subject-filter">
+                            <option value="">All Subjects</option>
+                            <option value="DS">Data Structures</option>
+                            <option value="DBMS">Database Systems</option>
+                            <option value="OS">Operating Systems</option>
+                        </select>
+                        <select class="filter-select" id="status-filter">
+                            <option value="">All Status</option>
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                            <option value="leave">Leave</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="attendance-records">
+                        <table class="data-table" id="detailed-records">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Subject</th>
+                                    <th>Time</th>
+                                    <th>Faculty</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="records-body">
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button class="page-btn" id="prev-page">Previous</button>
+                        <span class="page-info">Page <span id="current-page">1</span> of <span id="total-pages">5</span></span>
+                        <button class="page-btn" id="next-page">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Statistics -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-pie"></i> Attendance Statistics
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="statistics-grid">
+                        <div class="statistic-chart">
+                            <canvas id="attendanceDistributionChart"></canvas>
+                        </div>
+                        <div class="statistic-details">
+                            <div class="statistic-item">
+                                <h4>Best Subject</h4>
+                                <p>Data Structures</p>
+                                <span class="stat-value">98.5%</span>
+                            </div>
+                            <div class="statistic-item">
+                                <h4>Most Absent Day</h4>
+                                <p>Monday</p>
+                                <span class="stat-value">3 absences</span>
+                            </div>
+                            <div class="statistic-item">
+                                <h4>Peak Attendance Time</h4>
+                                <p>10:00 AM - 12:00 PM</p>
+                                <span class="stat-value">100% attendance</span>
+                            </div>
+                            <div class="statistic-item">
+                                <h4>Faculty with Best Record</h4>
+                                <p>Dr. Sarah Williams</p>
+                                <span class="stat-value">99% accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regularity Score -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-star"></i> Regularity Score
+                    </h3>
+                    <div class="score-display">
+                        <span class="score-value">8.7/10</span>
+                        <span class="score-label">Excellent</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="regularity-metrics">
+                        <div class="metric">
+                            <div class="metric-header">
+                                <span class="metric-label">Punctuality</span>
+                                <span class="metric-value">9.2/10</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header">
+                                <span class="metric-label">Consistency</span>
+                                <span class="metric-value">8.8/10</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header">
+                                <span class="metric-label">Participation</span>
+                                <span class="metric-value">8.5/10</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header">
+                                <span class="metric-label">Improvement</span>
+                                <span class="metric-value">8.3/10</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 83%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="regularity-tips">
+                        <h4><i class="fas fa-lightbulb"></i> Tips to Improve</h4>
+                        <ul>
+                            <li>Try to attend morning classes more consistently</li>
+                            <li>Submit leave requests in advance when possible</li>
+                            <li>Participate more in class discussions</li>
+                            <li>Set reminders for important classes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2024 EduTrack Pro. All rights reserved.</p>
+                        <p class="footer-links">
+                            <a href="#">Privacy Policy</a> • 
+                            <a href="#">Terms of Service</a> • 
+                            <a href="#">Help Center</a>
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <p class="system-info">
+                            <i class="fas fa-server"></i>
+                            <span>Attendance data updated: Today, 10:30 AM</span>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Attendance Detail Modal -->
+    <div class="modal" id="attendance-detail-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Attendance Details</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-header">
+                    <h4 id="detail-subject">Data Structures</h4>
+                    <span class="detail-date" id="detail-date">Monday, Nov 25, 2024</span>
+                </div>
+                
+                <div class="detail-info">
+                    <div class="info-row">
+                        <span class="info-label">Time:</span>
+                        <span class="info-value" id="detail-time">10:00 AM - 11:00 AM</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Faculty:</span>
+                        <span class="info-value" id="detail-faculty">Dr. Sarah Williams</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Room:</span>
+                        <span class="info-value" id="detail-room">Room 302</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Status:</span>
+                        <span class="status-badge" id="detail-status">Present</span>
+                    </div>
+                </div>
+                
+                <div class="detail-remarks">
+                    <h5>Remarks</h5>
+                    <p id="detail-remarks">Student was actively participating in class discussion.</p>
+                </div>
+                
+                <div class="detail-evidence">
+                    <h5>Evidence</h5>
+                    <div class="evidence-items" id="evidence-items">
+                        <!-- Evidence items will be added here -->
+                    </div>
+                </div>
+                
+                <div class="detail-actions">
+                    <button class="btn btn-outline" id="raise-query">
+                        <i class="fas fa-question-circle"></i> Raise Query
+                    </button>
+                    <button class="btn btn-primary" id="download-certificate">
+                        <i class="fas fa-certificate"></i> Download Certificate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/student.js"></script>
+    <script src="../js/attendance-system.js"></script>
+</body>
+</html>
