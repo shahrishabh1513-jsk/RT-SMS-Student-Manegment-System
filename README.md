@@ -307,7 +307,7 @@ RT-SMS-Student-Manegment-System/
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="30%" valign="top">
 
 **Option 1 — Use the live app**
 
@@ -316,7 +316,7 @@ No setup needed 👉 **[Open RT SMS](https://shahrishabh1513-jsk.github.io/RT-SM
 Then sign in with one of the [demo logins](#-demo-logins).
 
 </td>
-<td width="50%" valign="top">
+<td width="70%" valign="top">
 
 **Option 2 — Run it locally**
 
