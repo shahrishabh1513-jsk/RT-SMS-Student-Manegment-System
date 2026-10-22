@@ -25,21 +25,14 @@
 <a href="https://github.com/shahrishabh1513-jsk/RT-SMS-Student-Manegment-System/stargazers"><img src="https://img.shields.io/badge/⭐_STAR-Support_This_Repo-DB2777?style=for-the-badge"/></a>
 <a href="#-demo-logins"><img src="https://img.shields.io/badge/🔑_DEMO_LOGINS-059669?style=for-the-badge"/></a>
 
-<br/><br/>
+<br/>
 
 <img src="https://img.shields.io/badge/ROLES-3-2563EB?style=for-the-badge&labelColor=1E293B"/>
 <img src="https://img.shields.io/badge/PORTALS-Student_·_Faculty_·_Admin-059669?style=for-the-badge&labelColor=1E293B"/>
 <img src="https://img.shields.io/badge/PDF_EXPORTS-5_Types-DB2777?style=for-the-badge&labelColor=1E293B"/>
 <img src="https://img.shields.io/badge/BUILT_WITH-HTML_·_CSS_·_JS-2563EB?style=for-the-badge&labelColor=1E293B"/>
 
-<br/><br/>
-
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/>
-<img src="https://img.shields.io/badge/GitHub_Pages-222?style=flat-square&logo=github&logoColor=white"/>
-<img src="https://img.shields.io/github/last-commit/shahrishabh1513-jsk/RT-SMS-Student-Manegment-System?style=flat-square&color=059669&label=Last%20Updated"/>
-<img src="https://img.shields.io/badge/Status-Live%20✅-brightgreen?style=flat-square"/>
+<br/>
 
 </div>
 
