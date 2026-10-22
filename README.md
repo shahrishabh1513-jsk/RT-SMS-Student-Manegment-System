@@ -1,16 +1,32 @@
-<table width="100%">
-<tr>
-<td width="25%" align="center">
-<img src="https://github.com/user-attachments/assets/90c19f97-8b0b-4df1-96c4-a288d337503c" width="110" alt="Shah Rishabh badge logo"/>
-</td>
-<td width="100%" align="center">
-<img src="https://shahrishabh1513-jsk.github.io/RT-SMS-Student-Manegment-System/assets/images/rt-sms-logo.png" width="90" alt="RT SMS logo"/>
-</td>
-<td width="25%" align="center">
-<img src="https://github.com/user-attachments/assets/41de0edc-f0a3-474a-9156-d8b3d10d41ba" width="110" alt="Shah Rishabh badge logo"/>
-</td>
-</tr>
+
+<table width="100%" align="center">
+  <tr>
+    <td width="20%" align="center" valign="middle">
+      <img
+        src="https://github.com/user-attachments/assets/90c19f97-8b0b-4df1-96c4-a288d337503c"
+        width="100"
+        alt="Shah Rishabh logo"
+      />
+    </td>
+
+    <td width="60%" align="center" valign="middle">
+      <img
+        src="https://shahrishabh1513-jsk.github.io/RT-SMS-Student-Manegment-System/assets/images/rt-sms-logo.png"
+        width="180"
+        alt="RT SMS Student Management System logo"
+      />
+    </td>
+
+    <td width="20%" align="center" valign="middle">
+      <img
+        src="https://github.com/user-attachments/assets/41de0edc-f0a3-474a-9156-d8b3d10d41ba"
+        width="100"
+        alt="Shah Rishabh logo"
+      />
+    </td>
+  </tr>
 </table>
+
 
 <div align="center">
 
