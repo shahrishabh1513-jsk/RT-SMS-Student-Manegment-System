@@ -65,7 +65,7 @@
 <tr>
 <td align="center">
 <a href="https://shahrishabh1513-jsk.github.io/RT-SMS-Student-Manegment-System/" target="_blank">
-<img src="https://github.com/user-attachments/assets/060132f2-4478-4e31-8bd1-8ee06ed7d73" width="100%" alt="RT SMS login page"/>
+<img src="https://github.com/user-attachments/assets/abd1c284-37a4-4c2e-b3a8-808824ca7c37" width="100%" alt="RT SMS login page"/>
 </a>
 </td>
 </tr>
