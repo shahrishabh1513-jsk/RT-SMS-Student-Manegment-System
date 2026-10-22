@@ -1,13 +1,13 @@
 <table width="100%" align="center">
   <tr>
     <td width="20%" align="center" valign="middle">
-      <img src="https://github.com/user-attachments/assets/90c19f97-8b0b-4df1-96c4-a288d337503c" width="100" alt="Shah Rishabh badge logo" />
+      <img src="https://github.com/user-attachments/assets/e38538b0-9e19-4f3f-a444-f8256bc3206d" width="100" alt="Shah Rishabh badge logo" />
     </td>
     <td width="60%" align="center" valign="middle">
       <img src="https://shahrishabh1513-jsk.github.io/RT-SMS-Student-Manegment-System/assets/images/rt-sms-logo.png" width="180" alt="RT SMS — Student Management System logo" />
     </td>
     <td width="20%" align="center" valign="middle">
-      <img src="https://github.com/user-attachments/assets/41de0edc-f0a3-474a-9156-d8b3d10d41ba" width="100" alt="Shah Rishabh badge logo" />
+      <img src="https://github.com/user-attachments/assets/3a2b3ad8-c80d-4e16-9480-4432548c1c28" width="100" alt="Shah Rishabh badge logo" />
     </td>
   </tr>
 </table>
