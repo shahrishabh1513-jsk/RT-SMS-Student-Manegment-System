@@ -31,7 +31,7 @@ const sched = cs => tb(['Day', 'Time', 'Subject', 'Room', 'Faculty'], cs.slice()
 const unread = () => S.nt.filter(n => !(S.rd[me.id] || []).includes(n.id)).length;
 const sync = () => { S = ld() || S; bn(); if (me && ['dash', 'live', 'att', 'nt', 'lv', 'efv', 'ef', 'fees', 'repo'].includes(rt) && !document.querySelector('.mo') && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) render(1) };
 
-/* results & helpers */
+/* results */
 const popup = h => { let m = document.createElement('div'); m.className = 'mo'; m.onclick = e => e.target == m && m.remove(); m.innerHTML = `<div class="md wide">${h}</div>`; document.body.appendChild(m); return m };
 const act = c => stu().some(s => s.sem == c.sem);
 const res = (u, n) => { let cr = 0, pt = 0, cs = S.c.filter(c => c.sem == n), rows = cs.map(c => { let m = (S.mk[u.id] || {})[c.code]; if (!m) return 0; let t = m[0] + m[1], g = gr(t); cr += c.cr; pt += g[1] * c.cr; return { c, i: m[0], e: m[1], t, g: g[0], ok: t >= 40 } }).filter(Boolean); return { rows, cr, sg: cr ? +(pt / cr).toFixed(2) : 0, tot: rows.reduce((a, r) => a + r.t, 0), pass: rows.length > 0 && rows.length == cs.length && rows.every(r => r.ok) } };
