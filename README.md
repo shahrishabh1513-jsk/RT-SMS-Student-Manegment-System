@@ -307,9 +307,9 @@ RT-SMS-Student-Manegment-System/
 
 ## 🚀 Getting Started
 
-<table>
+<table width="100%">
 <tr>
-<td width="30%" valign="top">
+<td width="40%" valign="top">
 
 **Option 1 — Use the live app**
 
@@ -318,7 +318,7 @@ No setup needed 👉 **[Open RT SMS](https://shahrishabh1513-jsk.github.io/RT-SM
 Then sign in with one of the [demo logins](#-demo-logins).
 
 </td>
-<td width="70%" valign="top">
+<td width="60%" valign="top">
 
 **Option 2 — Run it locally**
 
@@ -380,7 +380,7 @@ Then open `http://localhost:8000`.
 <a href="mailto:shahrishu1515@gmail.com"><img src="https://img.shields.io/badge/Email-DB2777?style=for-the-badge&logo=gmail&logoColor=white"/></a>
 <a href="https://github.com/shahrishabh1513-jsk"><img src="https://img.shields.io/badge/GitHub-1E293B?style=for-the-badge&logo=github&logoColor=white"/></a>
 
-<br/><br/>
+<br/>
 
 ### ⭐ If this project helped you, consider giving it a star!
 
