@@ -21,6 +21,7 @@
 <br/>
 
 <a href="https://shahrishabh1513-jsk.github.io/RT-SMS-Student-Manegment-System/"><img src="https://img.shields.io/badge/🟢_LIVE_APP-Open_RT_SMS-2563EB?style=for-the-badge"/></a>
+<a href="https://github.com/shahrishabh1513-jsk/RT-SMS-Student-Manegment-System/blob/main/RT_SMS_Project_Report.pdf"><img src="https://img.shields.io/badge/📄_PROJECT_REPORT-Read_PDF-7C3AED?style=for-the-badge"/></a>
 <a href="https://github.com/shahrishabh1513-jsk/RT-SMS-Student-Manegment-System"><img src="https://img.shields.io/badge/REPOSITORY-View_Code-1E293B?style=for-the-badge&logo=github&logoColor=white"/></a>
 <a href="https://github.com/shahrishabh1513-jsk/RT-SMS-Student-Manegment-System/stargazers"><img src="https://img.shields.io/badge/⭐_STAR-Support_This_Repo-DB2777?style=for-the-badge"/></a>
 <a href="#-demo-logins"><img src="https://img.shields.io/badge/🔑_DEMO_LOGINS-059669?style=for-the-badge"/></a>
@@ -275,10 +276,11 @@ flowchart LR
 ```bash
 RT-SMS-Student-Manegment-System/
 │
-├── index.html          # Login page → redirects by role
-├── student.html        # Student portal
-├── teacher.html        # Faculty portal
-├── admin.html          # Admin portal
+├── index.html                # Login page → redirects by role
+├── student.html              # Student portal
+├── teacher.html              # Faculty portal
+├── admin.html                # Admin portal
+├── RT_SMS_Project_Report.pdf # Project report
 │
 ├── assets/
 │   ├── css/
